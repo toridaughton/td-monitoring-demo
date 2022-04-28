@@ -1,11 +1,12 @@
 const express = require(`express`)
 const path = require('path') 
+const Rollbar = require('rollbar')
 
 const app = express()
 
 // include and initialize the rollbar library with your access token
-var Rollbar = require('rollbar')
-var rollbar = new Rollbar({
+
+let rollbar = new Rollbar({
   accessToken: '0dc32ae52db249f683a9e5b3f1c0aac6',
   captureUncaught: true,
   captureUnhandledRejections: true,
@@ -36,6 +37,11 @@ app.post('/api/student', (req, res)=>{
     rollbar.log('Student added successfuly', {author: "Scott", type: 'manual entry'})
 
     res.status(200).send(students)
+})
+
+app.get('/styles', (req, res) => {
+    res.sendFile(path.join(__dirname, '../styles.css'))
+    rollbar.info('css file served')
 })
 
 const port = process.env.PORT || 4545
