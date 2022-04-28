@@ -14,14 +14,14 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
-const students = []
+const students = ["kyle"]
 
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../index.html'))
 // })
 
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '../index.html'))
+    res.sendFile(path.join(__dirname, '../client/index.html'))
     rollbar.info('html file served successfully.')
     rollbar.info('File served')
 })
