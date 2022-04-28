@@ -23,17 +23,17 @@ app.get('/', (req,res) => {
     rollbar.info('html file served successfully.')
 })
 
-app.post('/api/student', (req, res)=>{
-    let {name} = req.body
-    name = name.trim()
+// app.post('/api/student', (req, res)=>{
+//     let {name} = req.body
+//     name = name.trim()
 
-    students.push(name)
+//     students.push(name)
 
-    res.status(200).send(students)
-})
+//     res.status(200).send(students)
+// })
 
 const port = process.env.PORT || 4545
 
-app.use(rollbar.errorHandler())
+// app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`Take us to warp ${port}`))
