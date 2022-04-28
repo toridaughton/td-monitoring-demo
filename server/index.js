@@ -21,19 +21,24 @@ app.get('/', (req, res) => {
 app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, '../index.html'))
     rollbar.info('html file served successfully.')
+    rollbar.info('File served')
 })
 
-// app.post('/api/student', (req, res)=>{
-//     let {name} = req.body
-//     name = name.trim()
+const students = []
 
-//     students.push(name)
+app.post('/api/student', (req, res)=>{
+    let {name} = req.body
+    name = name.trim()
 
-//     res.status(200).send(students)
-// })
+    students.push(name)
+
+    rollbar.log('Student added successfuly', {author: "Scott", type: 'manual entry'})
+
+    res.status(200).send(students)
+})
 
 const port = process.env.PORT || 4545
 
-// app.use(rollbar.errorHandler())
+app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`Take us to warp ${port}`))
