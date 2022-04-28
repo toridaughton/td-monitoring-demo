@@ -14,6 +14,8 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+const students = []
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'))
 })
@@ -24,7 +26,6 @@ app.get('/', (req,res) => {
     rollbar.info('File served')
 })
 
-const students = []
 
 app.post('/api/student', (req, res)=>{
     let {name} = req.body
