@@ -18,6 +18,22 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'))
 })
 
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, '../index.html'))
+    rollbar.info('html file served successfully.')
+})
+
+app.post('/api/student', (req, res)=>{
+    let {name} = req.body
+    name = name.trim()
+
+    students.push(name)
+
+    res.status(200).send(students)
+})
+
 const port = process.env.PORT || 4545
+
+app.use(rollbar.errorHandler())
 
 app.listen(port, () => console.log(`Take us to warp ${port}`))
